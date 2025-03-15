@@ -21,17 +21,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // 📌 Conexión a MySQL
 const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "CheckMeKit",
+  host: process.env.DB_HOST, // Usa la variable de entorno
+  user: process.env.DB_USER, // Usa la variable de entorno
+  password: process.env.DB_PASSWORD, // Usa la variable de entorno
+  database: process.env.DB_NAME, // Usa la variable de entorno
 });
+
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ Error al conectar a la base de datos MySQL:", err);
+    console.error("❌ Error al conectar a la base de datos MySQL en Amazon:", err); // Mensaje más claro sobre la conexión a Amazon
   } else {
-    console.log("✅ Conectado a la base de datos MySQL");
+    console.log("✅ Conexión exitosa a la base de datos MySQL en Amazon RDS/EC2"); // Mensaje más claro sobre el servidor
   }
 });
 
