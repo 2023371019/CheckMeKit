@@ -20,19 +20,20 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // 📌 Conexión a MySQL
-const db = mysql.createConnection({
-  host: process.env.DB_HOST, // Usa la variable de entorno
-  user: process.env.DB_USER, // Usa la variable de entorno
-  password: process.env.DB_PASSWORD, // Usa la variable de entorno
-  database: process.env.DB_NAME, // Usa la variable de entorno
-});
 
+const db = mysql.createConnection({
+  host: process.env.DB_HOST, // Dirección de tu base de datos en RDS
+  user: process.env.DB_USER, // Usuario de la base de datos
+  password: process.env.DB_PASSWORD, // Contraseña de la base de datos
+  database: process.env.DB_NAME, // Nombre de la base de datos
+  port: 3306, // Puerto estándar de MySQL (no es necesario especificarlo si usas el puerto por defecto)
+});
 
 db.connect((err) => {
   if (err) {
-    console.error("❌ Error al conectar a la base de datos MySQL en Amazon:", err); // Mensaje más claro sobre la conexión a Amazon
+    console.error("❌ Error al conectar a la base de datos MySQL:", err);
   } else {
-    console.log("✅ Conexión exitosa a la base de datos MySQL en Amazon RDS/EC2"); // Mensaje más claro sobre el servidor
+    console.log("✅ Conectado a la base de datos MySQL");
   }
 });
 
